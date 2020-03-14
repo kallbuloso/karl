@@ -6,6 +6,6 @@ All notable changes to `Karl` will be documented in this file.
 
 ### Added
 - Tools Replace
-    - tools:replace               - `Replace default Models from path Model or - other of your choice`
-    - tools:replace-name          - `Rewrite default Models path if exist`
-    - tools:replace-default       - `Replace to default Models of path "app"`
+    - karl:make-model-replace          - `Replace default Models from path Model or - other of your choice`
+    - karl:make-model-rewrite          - `Rewrite default Models path if exist`
+    - karl:make-make-model-default     - `Replace to default Models of path "app"`

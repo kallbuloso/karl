@@ -13,6 +13,8 @@ class KarlServiceProvider extends ServiceProvider
      */
     protected $commands = [
         'kallbuloso\Karl\Commands\ModelReplaceCommand',
+        'kallbuloso\Karl\Commands\ModelsDefaulCommnand',
+        'kallbuloso\Karl\Commands\ModelsRewriteCommand',
     ];
     /**
      * Perform post-registration booting of services.

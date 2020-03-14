@@ -19,6 +19,46 @@ trait ModelReplaceTrait
     }
 
     /**
+     * Chek if exist Old Model Name
+     *
+     * @return void
+     */
+    protected function chekOldModelName($oldModelName)
+    {
+        if ($this->laravel['files']->isDirectory($dir = app_path($oldModelName))) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Chek if exist Model Name
+     *
+     * @return void
+     */
+    protected function chekNewModelName($modelName)
+    {
+        if ($this->laravel['files']->isDirectory($dir = app_path($modelName))) {
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * Get Argument Name
+     *
+     * @return void
+     */
+    protected function getArgName()
+    {
+        if (static::hasMacro($this->argument('model'))) {
+            return call_user_func(static::$macros[$this->argument('model')], $this);
+        }
+        return $this->argument('model');
+    }
+
+    /**
      * Export the auth to new path.
      *
      * @return void
@@ -51,6 +91,40 @@ trait ModelReplaceTrait
 
         unlink($getPath);
     }
+
+    /**
+     * Set Model Command
+     *
+     * @return void
+     */
+    protected function setReplaceModelCommand($oldModelName, $modelName)
+    {
+        $getPath = app_path('Console\\Commands\\ModelMakeCommand.php');
+            return $this->replace($getPath, '{$rootNamespace}\\'.$oldModelName, '{$rootNamespace}\\'. $modelName);
+    }
+
+
+    /**
+     * Export the auth to new path.
+     *
+     * @return void
+     */
+    protected function exportReplaceAuthToNewPath($oldPath, $newPath)
+    {
+        $this->makeDir($newPath);
+
+        $getPath = app_path($oldPath.'/User.php');
+        $setPath = app_path($newPath .'/User.php');
+        copy($getPath, $setPath);
+
+        chmod($getPath, 0777);
+        unlink($getPath);
+
+        @chmod($oldPath, 0777);
+
+        @rmdir(app_path($oldPath));
+    }
+
 
     /**
      * Create a directory if it doesn't exist.

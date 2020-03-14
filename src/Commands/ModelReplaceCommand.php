@@ -9,7 +9,6 @@ use kallbuloso\Karl\Builder\ModelReplace\ModelReplaceTrait;
 
 class ModelReplaceCommand extends Command
 {
-
     use ModelReplaceTrait, Progressbar, Helpers;
 
     /**
@@ -17,7 +16,7 @@ class ModelReplaceCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'karl:model-replace {model=Models}';
+    protected $signature = 'karl:make-model-replace {model=Models}';
 
     /**
      * The console command description.
@@ -45,12 +44,13 @@ class ModelReplaceCommand extends Command
         $this->makeProgress("Replacing files of User");
         $this->replace(app_path($modelName.'\\User.php'), "App", 'App\\'. $modelName);
 
-            $paths = [
-                    'Auth/Register' => app_path('Http\\Controllers\\Auth\\RegisterController.php'),
-                    'Auth/Config' => base_path('config\\auth.php'),
-                    'Auth/Services' => base_path('config\\services.php'),
-                    'Auth/UserFactory' => base_path('database\\factories\\UserFactory.php'),
-                ];
+        $paths = [
+            'Auth/Register' => app_path('Http\\Controllers\\Auth\\RegisterController.php'),
+            'Auth/Config' => base_path('config\\auth.php'),
+            'Auth/Services' => base_path('config\\services.php'),
+            'Auth/UserFactory' => base_path('database\\factories\\UserFactory.php'),
+        ];
+
         foreach ($paths as $key => $path)
         {
             $this->makeProgress("Replacing file of $key");
@@ -70,18 +70,5 @@ class ModelReplaceCommand extends Command
         // Finished creating the package, end of the progress bar
         $this->finishProgress('Model Path created successfully!');
         $this->dumpAutoloads();
-    }
-
-    /**
-     * Get Argument Name
-     *
-     * @return void
-     */
-    protected function getArgName()
-    {
-        if (static::hasMacro($this->argument('model'))) {
-            return call_user_func(static::$macros[$this->argument('model')], $this);
-        }
-        return $this->argument('model');
     }
 }
