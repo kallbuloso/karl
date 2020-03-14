@@ -1,5 +1,5 @@
 {
-    "name": "kallbuloso/karl",
+    "name": "kallbuloso/laravel-karl",
     "description": ":My Tools for Application Laravel",
     "license": "MIT",
     "authors": [
@@ -9,7 +9,7 @@
             "homepage": "https://github.com/kallbuloso"
         }
     ],
-    "homepage": "https://github.com/kallbuloso/karl",
+    "homepage": "https://github.com/kallbuloso/laravel-karl",
     "keywords": ["Laravel", "Karl"],
     "require": {
         "illuminate/support": "~5|~6|~7",
