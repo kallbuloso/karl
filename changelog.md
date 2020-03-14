@@ -2,10 +2,18 @@
 
 All notable changes to `Karl` will be documented in this file.
 
+## Version 1.1.0
+
+### Added
+- karl makeschema
+    - karl:make-schema - `Set Schema in AppServiceProvider`
+    - replace "description added" in Changelog
+
+
 ## Version 1.0
 
 ### Added
-- Tools Replace
-    - karl:make-model-replace          - `Replace default Models from path Model or - other of your choice`
-    - karl:make-model-rewrite          - `Rewrite default Models path if exist`
-    - karl:make-make-model-default     - `Replace to default Models of path "app"`
+- karl Model Replace
+    - karl:make-model-replace - `Replace default Models from path Model or - other of your choice`
+    - karl:make-model-rewrite - `Rewrite default Models path if exist`
+    - karl:make-make-model-default - `Replace to default Models of path "app"`

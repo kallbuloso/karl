@@ -12,6 +12,7 @@ class KarlServiceProvider extends ServiceProvider
      * @var bool
      */
     protected $commands = [
+        'kallbuloso\Karl\Commands\MakeSchemaCommand',
         'kallbuloso\Karl\Commands\ModelReplaceCommand',
         'kallbuloso\Karl\Commands\ModelsDefaulCommnand',
         'kallbuloso\Karl\Commands\ModelsRewriteCommand',

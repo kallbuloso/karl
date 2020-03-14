@@ -50,6 +50,7 @@ Opcionalmente, você pode publicar a configuração para fornecer um `stub` de p
 Aqui estão as informações de uso dos comandos;
 
 - [karl:make-model-replace](/readme/models.md)
+- [karl:make-schema](/readme/schema.md)
 
 ## Change log
 
