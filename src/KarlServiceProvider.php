@@ -12,7 +12,7 @@ class KarlServiceProvider extends ServiceProvider
      * @var bool
      */
     protected $commands = [
-        'kallbuloso\Karl\Commands\MyCommand',
+        'kallbuloso\Karl\Commands\ModelReplaceCommand',
     ];
     /**
      * Perform post-registration booting of services.

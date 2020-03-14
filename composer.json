@@ -1,6 +1,6 @@
 {
     "name": "kallbuloso/karl",
-    "description": ":package_description",
+    "description": ":My Tools for Application Laravel",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
     "homepage": "https://github.com/kallbuloso/karl",
     "keywords": ["Laravel", "Karl"],
     "require": {
-        "illuminate/support": "~5|~6",
+        "illuminate/support": "~5|~6|~7",
         "kallbuloso/laravel-blade-directives": "^1.0"
     },
     "require-dev": {

@@ -1,6 +1,7 @@
 <?php
 
 return [
+
     /**
      * // TODO: Criar comando de dependências iniciais
      *
@@ -14,6 +15,13 @@ return [
         "require-dev" => [
 
         ],
+    ],
+
+    /**
+     * Model Replace config
+     */
+    'modelReplace' => [
+        'defaultModelName' => 'Model',
     ],
     //
 ];
