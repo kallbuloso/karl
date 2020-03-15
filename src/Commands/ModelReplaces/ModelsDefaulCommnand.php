@@ -1,6 +1,6 @@
 <?php
 
-namespace kallbuloso\Karl\Commands;
+namespace kallbuloso\Karl\Commands\ModelReplaces;
 
 use Illuminate\Console\Command;
 use kallbuloso\Karl\Helpers\Helpers;

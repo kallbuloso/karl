@@ -12,10 +12,10 @@ class KarlServiceProvider extends ServiceProvider
      * @var bool
      */
     protected $commands = [
-        'kallbuloso\Karl\Commands\MakeSchemaCommand',
-        'kallbuloso\Karl\Commands\ModelReplaceCommand',
-        'kallbuloso\Karl\Commands\ModelsDefaulCommnand',
-        'kallbuloso\Karl\Commands\ModelsRewriteCommand',
+        'kallbuloso\Karl\Commands\Schema\MakeSchemaCommand',
+        'kallbuloso\Karl\Commands\ModelReplaces\ModelReplaceCommand',
+        'kallbuloso\Karl\Commands\ModelReplaces\ModelsDefaulCommnand',
+        'kallbuloso\Karl\Commands\ModelReplaces\ModelsRewriteCommand',
     ];
     /**
      * Perform post-registration booting of services.
