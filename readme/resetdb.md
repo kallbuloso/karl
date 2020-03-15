@@ -35,7 +35,7 @@ $ php artisan karl:make-reset-db
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](/LICENSE.md) for more information.
 
 [link-author]: https://github.com/kallbuloso
 [link-kallbuloso]: http://kallbuloso.com.br
