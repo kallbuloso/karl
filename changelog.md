@@ -2,13 +2,18 @@
 
 All notable changes to `Karl` will be documented in this file.
 
+## Version 1.2.0
+
+### Added
+- karl makeschema
+    - karl:make-reset-db - `Reset all database data`
+
 ## Version 1.1.0
 
 ### Added
 - karl makeschema
     - karl:make-schema - `Set Schema in AppServiceProvider`
     - replace "description added" in Changelog
-
 
 ## Version 1.0
 
