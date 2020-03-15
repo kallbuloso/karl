@@ -51,6 +51,7 @@ Aqui estão as informações de uso dos comandos;
 
 - [karl:make-model-replace](/readme/models.md)
 - [karl:make-schema](/readme/schema.md)
+- [karl:make-reset-db](/readme/resetdb.md)
 
 ## Change log
 
