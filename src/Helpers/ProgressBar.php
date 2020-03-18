@@ -6,6 +6,7 @@ namespace kallbuloso\Karl\Helpers;
 // use Symfony\Component\Console\Style\SymfonyStyle;
 trait ProgressBar
 {
+    protected $usleep = '100000';
     /**
      * Symfony ProgressBar instance.
      * @var object \Symfony\Component\Console\Helper\ProgressBar
@@ -38,7 +39,8 @@ trait ProgressBar
 
         $this->progressBar->start();
         $this->info($message);
-        usleep(100000);
+        usleep($this->usleep);
+        // sleep('1');
     }
 
     /**
@@ -50,7 +52,7 @@ trait ProgressBar
     {
         $this->progressBar->advance();
         $this->info($message);
-        usleep(100000);
+        usleep($this->usleep);
         // sleep('1');
     }
 

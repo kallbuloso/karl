@@ -2,9 +2,16 @@
 
 All notable changes to `Karl` will be documented in this file.
 
-## Version 1.2.1
+## Version 1.3.0
 
 ### Added
+-   karl:make-multi-auth
+-   Updated schema
+-   trait Commands
+
+## Version 1.2.1
+
+### Updated
 - karl update
     - `Update Commands path`
     - `update Changelog`

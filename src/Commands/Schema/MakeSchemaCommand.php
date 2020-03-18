@@ -2,13 +2,13 @@
 
 namespace kallbuloso\Karl\Commands\Schema;
 
-use Illuminate\Console\Command;
 use kallbuloso\Karl\Helpers\Helpers;
 use kallbuloso\Karl\Builder\Schema\MakeSchemaTrait;
+use kallbuloso\Karl\Commands\BaseLocalCommand;
 
-class MakeSchemaCommand extends Command
+class MakeSchemaCommand extends BaseLocalCommand
 {
-    use MakeSchemaTrait, Helpers;
+    use MakeSchemaTrait;
 
     /**
      * The name and signature of the console command.

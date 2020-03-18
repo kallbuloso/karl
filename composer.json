@@ -12,6 +12,10 @@
     "homepage": "https://github.com/kallbuloso/laravel-karl",
     "keywords": ["Laravel", "Karl"],
     "require": {
+        "illuminate/auth": "~5|~6|~7",
+        "illuminate/console": "~5|~6|~7",
+        "illuminate/notifications": "~5|~6|~7",
+        "illuminate/routing": "~5|~6|~7",
         "illuminate/support": "~5|~6|~7",
         "kallbuloso/laravel-blade-directives": "^1.0"
     },

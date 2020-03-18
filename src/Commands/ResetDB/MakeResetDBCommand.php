@@ -1,6 +1,8 @@
 <?php
 namespace kallbuloso\Karl\Commands\ResetDB;
 
+use kallbuloso\Karl\Commands\BaseLocalCommand;
+
 class MakeResetDBCommand extends BaseLocalCommand
 {
     /**

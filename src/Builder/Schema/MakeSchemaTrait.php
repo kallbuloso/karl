@@ -2,63 +2,23 @@
 
 namespace kallbuloso\Karl\Builder\Schema;
 
+use kallbuloso\Karl\Helpers\Helpers;
 use kallbuloso\Karl\Helpers\ProgressBar;
 
 trait MakeSchemaTrait
 {
-    use ProgressBar;
-
-    /**
-     * Placeholders.
-     * @var array
-     */
-    protected $path = null;
-
-    /**
-     * Replacements.
-     * @var array
-     */
-    protected $replacements = null;
+    use ProgressBar, Helpers;
 
     protected function makeSchema()
     {
         $path = app_path('Providers\\AppServiceProvider.php');
-        $setReplacement =
-'<?php
+        $stubPath = __DIR__ .'/stubs/AppServiceProvider.stub';
 
-namespace App\Providers;
+        $contentPath = file_get_contents($path);
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\ServiceProvider;
+        $search = $contentPath;
+        $replace = file_get_contents($stubPath);
 
-class AppServiceProvider extends ServiceProvider
-{
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
-
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        Schema::defaultStringLength(191);
-        //
-    }
-}';
-        if (file_exists($path)) {
-            $file = file_get_contents($path);
-            $file = str_replace($file, '', $file);
-
-            file_put_contents($path, $setReplacement);
-        }
+        $this->replaceIn($path, $search, $replace);
     }
 }

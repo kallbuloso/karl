@@ -2,12 +2,12 @@
 
 namespace kallbuloso\Karl\Commands\ModelReplaces;
 
-use Illuminate\Console\Command;
 use kallbuloso\Karl\Helpers\Helpers;
 use kallbuloso\Karl\Helpers\Progressbar;
+use kallbuloso\Karl\Commands\BaseLocalCommand;
 use kallbuloso\Karl\Builder\ModelReplace\ModelReplaceTrait;
 
-class ModelReplaceCommand extends Command
+class ModelReplaceCommand extends BaseLocalCommand
 {
     use ModelReplaceTrait, Progressbar, Helpers;
 

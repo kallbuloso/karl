@@ -12,7 +12,9 @@ class KarlServiceProvider extends ServiceProvider
      * @var bool
      */
     protected $commands = [
+        'kallbuloso\Karl\Commands\MultiAuth\MultiAuthCommand',
         'kallbuloso\Karl\Commands\Schema\MakeSchemaCommand',
+        'kallbuloso\Karl\Commands\ResetDB\MakeResetDBCommand',
         'kallbuloso\Karl\Commands\ModelReplaces\ModelReplaceCommand',
         'kallbuloso\Karl\Commands\ModelReplaces\ModelsDefaulCommnand',
         'kallbuloso\Karl\Commands\ModelReplaces\ModelsRewriteCommand',

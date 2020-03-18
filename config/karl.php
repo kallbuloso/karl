@@ -18,10 +18,19 @@ return [
     ],
 
     /**
-     * Model Replace config
+     * Model Path
      */
-    'modelReplace' => [
-        'defaultModelName' => 'Model',
+    'model_path' =>  'Models',
+
+    /**
+     * Auth and MultiAuth COnfigurations
+     */
+    'auth' => [
+
+        /**
+         * Default Model Namespace
+         */
+        'modelNamespace' => 'Models',
+
     ],
-    //
 ];
