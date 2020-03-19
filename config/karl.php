@@ -28,9 +28,34 @@ return [
     'auth' => [
 
         /**
-         * Default Model Namespace
+         * Create layouts path and scaffold
+         * Defautl => false
          */
-        'modelNamespace' => 'Models',
+        'layout_path' => false,
 
+        /**
+         * Default Layouts Extends : layouts.app
+         */
+        'layouts_extends' => 'template::app',
+
+        'page_home' => [
+
+            /**
+             * make page home
+             * Default => true
+             */
+            'make_page' => true,
+
+            /**
+             * name page home
+             * Default => nome
+             */
+            'name' => 'home',
+        ],
+
+        /**
+         * Redirect page after login
+         */
+        'redirect_page' => '/dashboard',
     ],
 ];

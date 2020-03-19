@@ -51,9 +51,7 @@ Read the [wiki](https://github.com/mtvbrianking/multi-auth/wiki/Email-Verificati
 
 ## Tasks
 
--   Alterar os Models em projetos existentes
--   Ao trocar o nome do Diretório, verificar e alterar outros models existentes além do padrão (User.php).
--   Ler as outras Tasks.
+-   Criar autenticação simples (sem confirmação de e-mail)
 
 ## License
 

@@ -1,6 +1,5 @@
 # Laravel `karl:make-comando` Command
 
-
 Este comando só pode ser usado no início do projeto, do contrário apresentará erro e também será necessário alterá-los manualmente. Futuramente pretendo fazer a busca pelos Models existentes e alterá-los ( veja mais em =>[Tasks](#tasks) ). Mas é o que tem pra hoje ;).
 
 <!-- TOC -->

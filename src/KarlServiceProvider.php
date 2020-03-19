@@ -12,6 +12,7 @@ class KarlServiceProvider extends ServiceProvider
      * @var bool
      */
     protected $commands = [
+        'kallbuloso\Karl\Commands\Auth\AuthMakeCommand',
         'kallbuloso\Karl\Commands\MultiAuth\MultiAuthCommand',
         'kallbuloso\Karl\Commands\Schema\MakeSchemaCommand',
         'kallbuloso\Karl\Commands\ResetDB\MakeResetDBCommand',
@@ -61,7 +62,7 @@ class KarlServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['karl'];
+        return $this->commands;
     }
 
     /**

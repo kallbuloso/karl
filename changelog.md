@@ -2,6 +2,16 @@
 
 All notable changes to `Karl` will be documented in this file.
 
+## Version 1.4.0
+
+### Added
+-   karl:make-auth
+
+### Updated
+-   Updated KarlServiceProvider [provides]
+-   BaseCommand
+-   Helpers
+
 ## Version 1.3.0
 
 ### Added

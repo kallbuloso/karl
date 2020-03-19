@@ -4,7 +4,7 @@ namespace kallbuloso\Karl\Commands;
 
 use Illuminate\Console\Command;
 
-class MyCommand extends Command
+class MyCommand extends BaseLocalCommand
 {
     /**
      * The name and signature of the console command.

@@ -49,6 +49,8 @@ Opcionalmente, você pode publicar a configuração para fornecer um `stub` de p
 ## Tools
 Aqui estão as informações de uso dos comandos;
 
+- [karl:make-auth](/readme/auth.md)
+- [karl:make-multi-auth](/readme/multiauth.md)
 - [karl:make-model-replace](/readme/models.md)
 - [karl:make-schema](/readme/schema.md)
 - [karl:make-reset-db](/readme/resetdb.md)
