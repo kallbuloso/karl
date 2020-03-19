@@ -2,6 +2,11 @@
 
 All notable changes to `Karl` will be documented in this file.
 
+## Version 1.4.1
+
+### Updated
+-   Updated/added Redirect if Authenticated
+
 ## Version 1.4.0
 
 ### Added
