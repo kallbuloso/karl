@@ -1,0 +1,2 @@
+
+Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');

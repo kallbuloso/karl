@@ -38,6 +38,14 @@ return [
          */
         'layouts_extends' => 'template::app',
 
+        /**
+         * Default Confirm
+         */
+        'confirm' => [
+
+            'redirect_after_confirm' => '/home',
+        ],
+
         'page_home' => [
 
             /**

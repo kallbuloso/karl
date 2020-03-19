@@ -23,6 +23,6 @@ class {{name_controller}}Controller extends Controller
      */
     public function index()
     {
-        return view('{{redirect_page}}');
+        return view('/{{redirect_page}}');
     }
 }
