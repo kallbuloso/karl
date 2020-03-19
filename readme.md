@@ -3,7 +3,6 @@
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
 [![Build Status][ico-travis]][link-travis]
-[![StyleCI][ico-styleci]][link-styleci]
 
 Este é um pacote que criei para uso pessoal. A maioria dos componentes/comandos adicionados neste `package` é/serão um compilado de comandos já existentes no repositório do [Github](https://github.com). 
 
@@ -86,12 +85,10 @@ O kallbuloso/laravel-tools é liberado sob a licença MIT. Consulte o [arquivo d
 [ico-version]: https://img.shields.io/packagist/v/kallbuloso/laravel-karl.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/kallbuloso/laravel-karl.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/kallbuloso/laravel-karl/master.svg?style=flat-square
-[ico-styleci]: https://styleci.io/repos/12345678/shield
 
 [link-packagist]: https://packagist.org/packages/kallbuloso/laravel-karl
 [link-downloads]: https://packagist.org/packages/kallbuloso/laravel-karl
 [link-travis]: https://travis-ci.org/kallbuloso/laravel-karl
-[link-styleci]: https://styleci.io/repos/12345678
 [link-author]: https://github.com/kallbuloso
 [link-kallbuloso]: http://kallbuloso.com.br
 [link-contributors]: /contributing.md
