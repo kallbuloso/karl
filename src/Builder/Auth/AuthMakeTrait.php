@@ -171,6 +171,27 @@ trait AuthMakeTrait
     }
 
     /**
+     * Alter Redirect if auth.
+     *
+     * @return void
+     */
+    protected function alterRedirectIfAuth()
+    {
+        $path = app_path("Http\\Middleware\\RedirectIfAuthenticated.php");
+
+        $search = [
+            file_get_contents($path)
+        ];
+
+        $replace = [
+            $this->compileStub(__DIR__.'/stubs/middleware/RedirectIfAuthenticated.stub')
+        ];
+
+        $this->replaceIn($path, $search, $replace);
+    }
+
+
+    /**
      * Export the Controller.
      *
      * @return void
@@ -187,10 +208,7 @@ trait AuthMakeTrait
             return;
         }
 
-
-
         $this->files->append(base_path('routes/web.php'), $route);
-
     }
 
     /**

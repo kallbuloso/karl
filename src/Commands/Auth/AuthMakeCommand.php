@@ -42,9 +42,41 @@ class AuthMakeCommand extends BaseLocalCommand
 
         $this->exportController();
 
+        $this->alterRedirectIfAuth();
+
         $this->exportRoute();
 
         $this->info('Authentication scaffolding generated successfully.');
+
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    private function makeSimpleAuth()
+    {
+
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    private function makeConfirmAuth()
+    {
+
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    private function ambiguosAuth()
+    {
 
     }
 }
