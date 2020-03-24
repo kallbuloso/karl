@@ -54,7 +54,9 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'user_name' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'signup-terms' => 'accepted',
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -94,15 +96,15 @@ class RegisterController extends Controller
             if(!$user->verified) {
                 $verifyUser->user->verified = 1;
                 $verifyUser->user->save();
-                $status = "Seu e-mail foi confirmado. Agora você pode fazer o login.";
+                $status = "Your e-mail is verified. You can now login.";
             }else{
-                $status = "Seu e-mail não precisa mais de confirmação. Agora você só precisa fazer o login.";
+                $status = "Your e-mail is already verified. You can now login.";
             }
         }else{
-            notify()->warning("Sinto muito, seu e-mail não foi identificado.",'Verificação de Email');
+            notify()->warning("Sorry your email cannot be identified.",'Email verify');
             return redirect('/login');
         }
-        notify()->success($status,'Verificação de Email');
+        notify()->success($status,'Email verify');
         return redirect('/login');
     }
 
@@ -110,7 +112,7 @@ class RegisterController extends Controller
     {
         $this->guard()->logout();
 
-        notify()->info('Nós lhe enviamos um código de ativação da conta. Abra seu e-mail e clique no link de verificação.','Registro de Usuário');
+        notify()->info('We sent you an activation code. Check your email and click on the link to verify.','User Register');
 
         return redirect('/login');
     }

@@ -1,22 +1,24 @@
 @extends('{{layoutsExtends}}')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
-
-                <div class="card-body">
+<div class="hero bg-white">
+    <div class="hero-inner">
+        <div class="content content-full">
+            <div class="py-30 text-center">
+                <div class="display-3 text-warning">
                     @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
-                        </div>
+                        <h1 class="h2 font-w700 mt-30 mb-10">{{ __('E-mail Confirmation Resend!') }}</h1>
+                        <h2 class="h3 font-w400 text-muted mb-50">{{ __('A verification email has been forwarded to:') }} {{ Auth::user()->email }}</h2>
+                    </div>
+                    @else
+                        <h1 class="h2 font-w700 mt-30 mb-10">{{ __('Registration successfully Complete!') }}</h1>
+                        <h3 class="h4 font-w400 text-muted mb-10">{{ __('Before proceeding, please check your email for a verification link.') }}</h3>
+                        <h3 class="h4 font-w400 text-muted mb-30">{{ __('If you did not receive the email, click the button below to resubmit') }}.</h3>
+                    </div>
+                    <a class="btn btn-hero btn-rounded btn-alt-secondary" href="{{ route('verification.resend') }}">
+                        <i class="fa fa-plus mr-10"></i> {{ __('E-mail Confirmation Resend!') }}
+                    </a>
                     @endif
-
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }}, <a href="{{ route('verification.resend') }}">{{ __('click here to request another') }}</a>.
-                </div>
             </div>
         </div>
     </div>

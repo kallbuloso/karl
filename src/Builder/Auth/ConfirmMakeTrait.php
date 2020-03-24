@@ -45,8 +45,11 @@ trait ConfirmMakeTrait
      * @var array
      */
     protected $migrations = [
-        'migrations\2014_10_12_000000_create_users_table.stub'    =>  'database\migrations\2014_10_12_000000_create_users_table.php',
-        'migrations\create_verify_users_table.stub'    =>  'database\migrations\create_verify_users_table.php',
+        'database\migrations\2014_10_12_000000_create_users_table.stub'    =>  'database\migrations\2014_10_12_000000_create_users_table.php',
+        'database\migrations\2020_10_12_000000_create_verify_users_table.stub'    =>  'database\migrations\2020_10_12_000000_create_verify_users_table.php',
+        'database\factories\UserFactory.stub'    =>  'database\factories\UserFactory.php',
+        'database\seeds\DatabaseSeeder.stub'    =>  'database\seeds\DatabaseSeeder.php',
+        'database\seeds\UsersTableSeeder.stub'    =>  'database\seeds\UsersTableSeeder.php',
     ];
 
     /**
