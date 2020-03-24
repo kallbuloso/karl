@@ -15,9 +15,9 @@ trait ConfirmMakeTrait
      * @var array
      */
     protected $apps = [
-        'app\Http\Controllers\Auth\ChangePasswordController.stub'    =>  'Http\Controllers\Auth\ChangePasswordController.php',
-        'app\Http\Controllers\Auth\LoginController.stub'    =>  'Http\Controllers\Auth\LoginController.php',
-        'app\Http\Controllers\Auth\RegisterController.stub'    =>  'Http\Controllers\Auth\RegisterController.php',
+        'app\Http\Controllers\Auth\LoginController.stub'            =>  'Http\Controllers\Auth\LoginController.php',
+        'app\Http\Controllers\Auth\RegisterController.stub'         =>  'Http\Controllers\Auth\RegisterController.php',
+        'app\Http\Controllers\Auth\ChangePasswordController.stub'   =>  'Http\Controllers\Auth\ChangePasswordController.php',
     ];
 
     /**
@@ -35,7 +35,7 @@ trait ConfirmMakeTrait
      * @var array
      */
     protected $models = [
-        'app\models\User.stub'    =>  'User.php',
+        'app\models\User.stub'          =>  'User.php',
         'app\models\VerifyUser.stub'    =>  'VerifyUser.php',
     ];
 
@@ -45,11 +45,11 @@ trait ConfirmMakeTrait
      * @var array
      */
     protected $migrations = [
-        'database\migrations\2014_10_12_000000_create_users_table.stub'    =>  'database\migrations\2014_10_12_000000_create_users_table.php',
+        'database\migrations\2014_10_12_000000_create_users_table.stub'           =>  'database\migrations\2014_10_12_000000_create_users_table.php',
         'database\migrations\2020_10_12_000000_create_verify_users_table.stub'    =>  'database\migrations\2020_10_12_000000_create_verify_users_table.php',
-        'database\factories\UserFactory.stub'    =>  'database\factories\UserFactory.php',
-        'database\seeds\DatabaseSeeder.stub'    =>  'database\seeds\DatabaseSeeder.php',
-        'database\seeds\UsersTableSeeder.stub'    =>  'database\seeds\UsersTableSeeder.php',
+        'database\factories\UserFactory.stub'       =>  'database\factories\UserFactory.php',
+        'database\seeds\DatabaseSeeder.stub'        =>  'database\seeds\DatabaseSeeder.php',
+        'database\seeds\UsersTableSeeder.stub'      =>  'database\seeds\UsersTableSeeder.php',
     ];
 
     /**
@@ -58,8 +58,8 @@ trait ConfirmMakeTrait
      * @var array
      */
     protected $views = [
-        'resources\views\emails\verifyUser.stub' => 'emails\verifyUser.blade.php',
-        'resources\views\auth\changepassword.stub' => 'emails\changepassword.blade.php',
+        'resources\views\emails\verifyUser.stub'    => 'emails\verifyUser.blade.php',
+        'resources\views\auth\changepassword.stub'  => 'emails\changepassword.blade.php',
     ];
 
     /**
