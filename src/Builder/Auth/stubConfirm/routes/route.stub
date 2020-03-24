@@ -1,2 +1,7 @@
 
+// User Register Verify
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
+
+// Change Password
+Route::get('/user/changePassword', 'Auth\ChangePasswordController@showChangePasswordForm');
+Route::post('/user/changePassword', 'Auth\ChangePasswordController@changePassword')->name('changePassword');

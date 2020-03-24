@@ -1,8 +1,8 @@
 <?php
 
-namespace {{namespace}}\Http\Controllers\Auth;
+namespace {{namespace}}Http\Controllers\Auth;
 
-use {{namespace}}\Http\Controllers\Controller;
+use {{namespace}}Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '{{redirectAfterConfirm}}';
 
     /**
      * Create a new controller instance.
@@ -42,7 +42,8 @@ class LoginController extends Controller
     {
         if (!$user->verified) {
             auth()->logout();
-            toastr()->warning('Conta não confirmada. Você recebeu um código de ativação, por favor verifique seu e-mail.', 'Registro de Usuário');
+            notify()->warning(Lang::getFromJson('Account not verified. You have received an activation code, please check your email.'),
+                            Lang::getFromJson('Login'));
             return back();
         }
         return redirect()->intended($this->redirectPath());

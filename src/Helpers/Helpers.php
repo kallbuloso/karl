@@ -17,7 +17,6 @@ trait Helpers
     /**
      * Create a new key generator command.
      *
-     * @param  \Illuminate\Support\Composer  $composer
      * @param  \Illuminate\Filesystem\Filesystem  $files
      * @return void
      */
@@ -66,6 +65,17 @@ trait Helpers
     public function dumpAutoloads()
     {
         shell_exec('composer dump-autoload');
+    }
+
+    /**
+     * @return bool
+     */
+    protected function runProcess(array $command)
+    {
+        $process = new \Symfony\Component\Process\Process($command, base_path());
+        $process->run();
+
+        return $process->getExitCode() === 0;
     }
 
 }

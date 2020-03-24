@@ -18,7 +18,8 @@
         "illuminate/notifications": "~5|~6|~7",
         "illuminate/routing": "~5|~6|~7",
         "illuminate/support": "~5|~6|~7",
-        "kallbuloso/laravel-blade-directives": "^1.0"
+        "kallbuloso/laravel-blade-directives": "^1.0",
+        "kallbuloso/notify": "self.version"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.0",

@@ -190,7 +190,6 @@ trait AuthMakeTrait
         $this->replaceIn($path, $search, $replace);
     }
 
-
     /**
      * Export the Controller.
      *

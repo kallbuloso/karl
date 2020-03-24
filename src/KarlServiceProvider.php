@@ -13,6 +13,7 @@ class KarlServiceProvider extends ServiceProvider
      */
     protected $commands = [
         'kallbuloso\Karl\Commands\Auth\AuthMakeCommand',
+        'kallbuloso\Karl\Commands\Auth\ConfirmMakeCommand',
         'kallbuloso\Karl\Commands\MultiAuth\MultiAuthCommand',
         'kallbuloso\Karl\Commands\Schema\MakeSchemaCommand',
         'kallbuloso\Karl\Commands\ResetDB\MakeResetDBCommand',

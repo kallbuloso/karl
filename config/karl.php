@@ -43,7 +43,7 @@ return [
          */
         'confirm' => [
 
-            'redirect_after_confirm' => '/home',
+            'redirect_after_confirm' => '/',
         ],
 
         'page_home' => [

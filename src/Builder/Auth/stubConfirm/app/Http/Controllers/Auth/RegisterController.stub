@@ -1,9 +1,9 @@
 <?php
 
-namespace {{namespace}}\Http\Controllers\Auth;
+namespace {{namespace}}Http\Controllers\Auth;
 
-use {{namespace}}\Http\Controllers\Controller;
-use {{namespace}}\Mail\VerifyMail;
+use {{namespace}}Http\Controllers\Controller;
+use {{namespace}}Mail\VerifyMail;
 use {{modelNamespace}}\User;
 use {{modelNamespace}}\VerifyUser;
 use Illuminate\Http\Request;
@@ -32,7 +32,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/{{redirectAfterConfirm}}';
+    protected $redirectTo = '{{redirectAfterConfirm}}';
 
     /**
      * Create a new controller instance.
@@ -69,6 +69,7 @@ class RegisterController extends Controller
     {
         $user = User::create([
             'name' => $data['name'],
+            'user_name' => $data['user_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
@@ -80,7 +81,7 @@ class RegisterController extends Controller
 
         Mail::to($user->email)->send(new VerifyMail($user));
 
-        toastr()->success('Conta criada com sucesso. Agora precisa ser ativada.','Registro de Usuário');
+        notify()->success('Conta criada com sucesso. Agora precisa ser ativada.','Registro de Usuário');
 
         return $user;
     }
@@ -98,10 +99,10 @@ class RegisterController extends Controller
                 $status = "Seu e-mail não precisa mais de confirmação. Agora você só precisa fazer o login.";
             }
         }else{
-            toastr()->warning("Sinto muito, seu e-mail não foi identificado.",'Verificação de Email');
+            notify()->warning("Sinto muito, seu e-mail não foi identificado.",'Verificação de Email');
             return redirect('/login');
         }
-        toastr()->success($status,'Verificação de Email');
+        notify()->success($status,'Verificação de Email');
         return redirect('/login');
     }
 
@@ -109,7 +110,7 @@ class RegisterController extends Controller
     {
         $this->guard()->logout();
 
-        toastr()->info('Nós lhe enviamos um código de ativação da conta. Abra seu e-mail e clique no link de verificação.','Registro de Usuário');
+        notify()->info('Nós lhe enviamos um código de ativação da conta. Abra seu e-mail e clique no link de verificação.','Registro de Usuário');
 
         return redirect('/login');
     }
