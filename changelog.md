@@ -2,6 +2,11 @@
 
 All notable changes to `Karl` will be documented in this file.
 
+## Version 1.4.2
+
+### Added
+-   make-auth-confir && ChangePassword
+
 ## Version 1.4.1
 
 ### Updated

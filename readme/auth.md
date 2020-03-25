@@ -22,6 +22,16 @@ $ php artisan karl::make-auth
 $ php artisan karl::make-auth --force
 # Com este comando força a criar todos os arquivos necessários para autenicação mesmo que já existam.
 ```
+
+```bash
+$ php artisan karl::make-auth-confirm
+# Com este comando criamos todos os arquivos necessários para confirmação da criação da conta por email
+```
+
+```bash
+$ php artisan karl::make-auth-confirm --force
+# Com este comando força a criar todos os arquivos necessários para confirmação da criação da conta por email mesmo que já existam.
+```
 ## Credits
 
 - [Amaral karl][link-author]
