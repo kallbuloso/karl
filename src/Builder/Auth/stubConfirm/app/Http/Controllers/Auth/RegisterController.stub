@@ -2,12 +2,13 @@
 
 namespace {{namespace}}Http\Controllers\Auth;
 
-use {{namespace}}Http\Controllers\Controller;
-use {{namespace}}Mail\VerifyMail;
 use {{modelNamespace}}\User;
+use {{namespace}}Mail\VerifyMail;
 use {{modelNamespace}}\VerifyUser;
 use Illuminate\Http\Request;
+use {{namespace}}Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -65,7 +66,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \{{modelNamespace}}\User
      */
     protected function create(array $data)
     {
@@ -83,8 +84,8 @@ class RegisterController extends Controller
 
         Mail::to($user->email)->send(new VerifyMail($user));
 
-        notify()->success('Conta criada com sucesso. Agora precisa ser ativada.','Registro de Usuário');
-
+        notify()->success(Lang::getFromJson('Registration successfully Complete!'),
+                          Lang::getFromJson('User Register'), ['timeOut' => 5000]);
         return $user;
     }
 
@@ -95,16 +96,18 @@ class RegisterController extends Controller
             $user = $verifyUser->user;
             if(!$user->verified) {
                 $verifyUser->user->verified = 1;
+                $verifyUser->user->email_verified_at = now();
                 $verifyUser->user->save();
                 $status = "Your e-mail is verified. You can now login.";
             }else{
                 $status = "Your e-mail is already verified. You can now login.";
             }
         }else{
-            notify()->warning("Sorry your email cannot be identified.",'Email verify');
+            notify()->warning(Lang::getFromJson('Sorry your email cannot be identified.'),
+                              Lang::getFromJson('Email verify'), ['timeOut' => 5000]);
             return redirect('/login');
         }
-        notify()->success($status,'Email verify');
+        notify()->success(Lang::getFromJson($status),Lang::getFromJson('Email verify'), ['timeOut' => 5000]);
         return redirect('/login');
     }
 
@@ -112,8 +115,9 @@ class RegisterController extends Controller
     {
         $this->guard()->logout();
 
-        notify()->info('We sent you an activation code. Check your email and click on the link to verify.','User Register');
+        notify()->info(Lang::getFromJson('Before proceeding, please check your email for a verification link.'),
+                       Lang::getFromJson('User Register'), ['timeOut' => 5000]);
 
-        return redirect('/login');
+        return redirect('/');
     }
 }

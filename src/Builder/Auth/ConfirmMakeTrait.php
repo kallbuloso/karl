@@ -59,7 +59,7 @@ trait ConfirmMakeTrait
      */
     protected $views = [
         'resources\views\emails\verifyUser.stub'    => 'emails\verifyUser.blade.php',
-        'resources\views\auth\changepassword.stub'  => 'emails\changepassword.blade.php',
+        'resources\views\auth\changepassword.stub'  => 'auth\changepassword.blade.php',
     ];
 
     /**
@@ -131,7 +131,7 @@ trait ConfirmMakeTrait
 
         foreach ($this->views as $key => $value) {
             if (file_exists($view = $this->getViewPath($value)) && ! $this->option('force')) {
-                if (! $this->confirm("The [{$value}] view/email already exists. Do you want to replace it?")) {
+                if (! $this->confirm("The [{$value}] view already exists. Do you want to replace it?")) {
                     continue;
                 }
             }
@@ -206,34 +206,31 @@ trait ConfirmMakeTrait
         foreach ($this->routes as $key => $value) {
 
             $stubRoute = $this->compileStub($key);
+            // $stubContent = file_get_contents($stubRoute);
+
+            // dd($stubRoute);
 
             $routePath = base_path($value);
 
-            if (file_exists($routePath) && $this->option('force')) {
-                $this->replaceIn($routePath, $stubRoute, $stubRoute);
-                return;
-            }
+            $routeGetContent = file_get_contents($routePath);
 
-            if (file_exists($route = $routePath)) {
-                $this->option('force');
+            $routeSetContent = str_replace($stubRoute, "",$routeGetContent);
+
+            // $routeContent = rtrim($routeContent, "\n$stubRoute");
+
+            $routeSetContent .= $stubRoute;
+
+            // dd($routeSetContent);
+
+            if (file_exists($routePath) || $this->option('force')) {
+                // $this->files->append($routePath, $routeContent);
+                $this->replaceIn($routePath, $routeGetContent, $routeSetContent);
+                return;
+            } else{
+                $this->files->append($routePath, $stubRoute);
             }
-            $this->files->append($routePath, $stubRoute);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * Compiles the Stub.

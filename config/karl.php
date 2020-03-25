@@ -64,6 +64,6 @@ return [
         /**
          * Redirect page after login
          */
-        'redirect_page' => '/dashboard',
+        'redirect_page' => 'welcome',
     ],
 ];

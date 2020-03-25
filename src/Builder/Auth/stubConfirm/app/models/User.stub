@@ -9,14 +9,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-    use SoftDeletes;
-
-    /**
-     * Opcional, informar a coluna deleted_at como um Mutator de data
-     *
-     * @var array
-     */
-    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.
