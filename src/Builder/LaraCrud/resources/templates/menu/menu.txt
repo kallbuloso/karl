@@ -1,0 +1,15 @@
+<!-- Menus for @@NAME@@ -->
+		<li class="@activeIfUrl('@@ACTIVE_LINK@@*','open')">
+			<a class="nav-submenu" data-toggle="nav-submenu" href="javascript:void(0)">
+				</i><span class="sidebar-mini-hide">@@NAME@@</span>
+			</a>
+			<ul>
+				<li>
+					<a class="@activeIfUrl('@@ACTIVE_LINK@@','active')" href="@route('@@ROUTE_NAME@@.index')">Listar</a>
+				</li>
+				<li>
+					<a class="@activeIfUrl('@@ACTIVE_LINK@@/create','active')" href="@route('@@ROUTE_NAME@@.create')">Novo</a>
+				</li>
+			</ul>
+		</li>
+		<!-- AddMenus for @@MODULE_NAME@@ -->

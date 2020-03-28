@@ -1,0 +1,6 @@
+    /**
+    * Mass assignable columns
+    */
+    protected $fillable=[
+        @@columns@@
+    ];

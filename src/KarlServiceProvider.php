@@ -3,15 +3,29 @@
 namespace kallbuloso\Karl;
 
 use Illuminate\Support\ServiceProvider;
+use kallbuloso\Karl\Builder\LaraCrud\DbReader\Database;
 
 class KarlServiceProvider extends ServiceProvider
 {
+    protected $defer = true;
+
     /**
-     * The console commands.
-     *
-     * @var bool
+     * List of command which will be registered.
+     * @var array
      */
     protected $commands = [
+        'kallbuloso\Karl\Commands\LaraCrud\Controller',
+        'kallbuloso\Karl\Commands\LaraCrud\Factory',
+        'kallbuloso\Karl\Commands\LaraCrud\Migration',
+        'kallbuloso\Karl\Commands\LaraCrud\Model',
+        'kallbuloso\Karl\Commands\LaraCrud\Mvc',
+        'kallbuloso\Karl\Commands\LaraCrud\Package',
+        'kallbuloso\Karl\Commands\LaraCrud\Policy',
+        'kallbuloso\Karl\Commands\LaraCrud\Request',
+        'kallbuloso\Karl\Commands\LaraCrud\Route',
+        'kallbuloso\Karl\Commands\LaraCrud\Test',
+        'kallbuloso\Karl\Commands\LaraCrud\Transformer',
+        'kallbuloso\Karl\Commands\LaraCrud\View',
         'kallbuloso\Karl\Commands\Auth\AuthMakeCommand',
         'kallbuloso\Karl\Commands\Auth\ConfirmMakeCommand',
         'kallbuloso\Karl\Commands\MultiAuth\MultiAuthCommand',
@@ -35,6 +49,14 @@ class KarlServiceProvider extends ServiceProvider
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
+            //DbReader\Database settings
+            Database::settings([
+                'pdo' => app('db')->connection()->getPdo(),
+                'manualRelations' => config('laracrud.model.relations', []),
+                'ignore' => config('laracrud.view.ignore', []),
+                'protectedColumns' => config('laracrud.model.protectedColumns', []),
+                'files' => config('laracrud.image.columns', []),
+            ]);
             $this->bootForConsole();
         }
     }
@@ -77,6 +99,11 @@ class KarlServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/karl.php' => config_path('karl.php'),
         ], 'karl.config');
+
+        // Publish Templates to view/vendor folder so user can customize this own templates
+        $this->publishes([
+            __DIR__ . '/Builder/LaraCrud/resources/templates' => resource_path('views/vendor/laracrud/templates')
+        ], 'laracrud-template');
 
         // Publishing the views.
         /*$this->publishes([
