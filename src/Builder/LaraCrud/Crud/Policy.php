@@ -94,10 +94,8 @@ class Policy implements Crud
         $this->modelNameSpace = $modelNamespace;
 
         $this->modelFullClass = $this->modelName = class_exists($model) ? $model : $this->modelNameSpace . '\\' . $model;
-        $this->modelFullClass = str_replace(
-            '\\'.config('karl.laracrud.rootNamespace', 'App'),
-            config('karl.laracrud.rootNamespace', 'App'),
-            $this->modelFullClass);
+        $rNs = config('karl.laracrud.rootNamespace');
+        $this->modelFullClass = str_replace('\\' . $rNs, $rNs, $this->modelFullClass);
 
         $this->checkName($name);
         $this->namespace = $this->getFullNS(trim(config('karl.laracrud.policy.namespace'), ' / ')) . $this->subNameSpace;

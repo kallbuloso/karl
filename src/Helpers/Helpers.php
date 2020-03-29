@@ -4,7 +4,6 @@ namespace kallbuloso\Karl\Helpers;
 
 use Illuminate\Filesystem\Filesystem;
 
-
 trait Helpers
 {
     /**

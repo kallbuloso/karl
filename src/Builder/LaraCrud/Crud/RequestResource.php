@@ -68,8 +68,18 @@ class RequestResource implements Crud
         if (!empty($only) && is_array($only)) {
             $this->methods = $only;
         }
+
+        $moduleEnabled = config('karl.laracrud.modules.enabled') == true ?? false;
+        $modulePath = config('karl.laracrud.modules.rootPath').'\\'.config('karl.laracrud.modules.vendorPath');
+
         $ns = !empty($api) ? config('karl.laracrud.request.apiNamespace') : config('karl.laracrud.request.namespace');
-        $this->namespace = $this->getFullNS(trim($ns, '/')) . '\\' . ucfirst(Str::camel($this->folderName));
+
+        $nSc = $moduleEnabled
+                ? $modulePath . '\\' . $ns
+                : $this->getFullNS(trim($ns, '/'));
+
+        $this->namespace = $nSc . '\\' . ucfirst(Str::camel($this->folderName));
+
         $this->modelName = $this->getModelName($this->table);
         $this->template = !empty($api) ? 'api' : 'web';
     }

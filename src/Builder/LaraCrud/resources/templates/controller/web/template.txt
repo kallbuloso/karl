@@ -9,8 +9,6 @@ use @@fullmodelName@@;
 
 /**
  * Description of @@controllerName@@
- *
- * @author Tuhin Bepari <digitaldreams40@gmail.com>
  */
 class @@controllerName@@ extends Controller
 {

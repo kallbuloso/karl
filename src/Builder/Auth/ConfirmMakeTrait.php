@@ -6,7 +6,7 @@ use Illuminate\Container\Container;
 use kallbuloso\Karl\Helpers\Helpers;
 
 trait ConfirmMakeTrait
-{    //XXX Criar os replaces, os comandos do confirm e adicionar também no auth
+{
     use Helpers;
 
     /**

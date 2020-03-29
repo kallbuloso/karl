@@ -107,7 +107,14 @@ class MigrationCrud implements Crud
      */
     public function save()
     {
-        $fullPath = config('karl.laracrud.migrationPath', 'database/migrations/') . $this->generateName($this->table->name()) . '.php';
+        $moduleEnabled = config('karl.laracrud.modules.enabled') == true ?? false;
+        $modulePath = config('karl.laracrud.modules.rootPath').'\\'.config('karl.laracrud.modules.vendorPath');
+        $migrationPath = config('karl.laracrud.migrationPath', 'database/migrations/') . $this->generateName($this->table->name()) . '.php';
+
+        $fullPath = $moduleEnabled
+                    ? $modulePath . '\\'. $migrationPath
+                    : $migrationPath;
+
         $migrationFile = new \SplFileObject($fullPath, 'w+');
         $migrationFile->fwrite($this->template());
     }

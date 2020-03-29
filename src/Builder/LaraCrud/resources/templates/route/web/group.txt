@@ -1,4 +1,4 @@
 
-Route::group(['prefix'=>'@@prefix@@'@@namespace@@], function () {
-    @@routes@@
-});
+    Route::group(['prefix'=>'@@prefix@@'@@namespace@@], function () {
+        @@routes@@
+    });

@@ -139,8 +139,17 @@ class Controller implements Crud
      */
     public function __construct($model, $name = '', $only = '', $api = false, $parent = false)
     {
-        $modelNamespace = $this->getFullNS(config('karl.laracrud.model.namespace', 'App'));
-        $this->modelNameSpace = $modelNamespace;
+        // $modelNamespace = $this->getFullNS(config('karl.laracrud.model.namespace', 'App'));
+        $ns = !empty($api) ? config('karl.laracrud.controller.apiNamespace') : config('karl.laracrud.controller.namespace');
+
+        $module = config('karl.laracrud.modules.rootPath').'\\'.config('karl.laracrud.modules.vendorPath');
+        if (config('karl.laracrud.modules.enabled') == true) {
+            $this->modelNameSpace = $module .'\\'.config('karl.laracrud.model.namespace', 'App');
+            $this->namespace = $module .'\\'.$ns;
+        } else {
+            $this->modelNameSpace = $this->getFullNS(config('karl.laracrud.model.namespace', 'App'));
+            $this->namespace = trim($this->getFullNS($ns), '/') . $this->subNameSpace;
+        }
 
         if (!class_exists($model)) {
             $this->modelName = $this->modelNameSpace . '\\' . $model;
@@ -182,8 +191,6 @@ class Controller implements Crud
         $this->template = !empty($api) ? 'api' : 'web';
         $this->template = !empty($this->parentModel) ? $this->template . '/parent' : $this->template;
 
-        $ns = !empty($api) ? config('karl.laracrud.controller.apiNamespace') : config('karl.laracrud.controller.namespace');
-        $this->namespace = trim($this->getFullNS($ns), '/') . $this->subNameSpace;
         $this->parseModelName();
 
         if (!empty($api)) {
@@ -191,7 +198,18 @@ class Controller implements Crud
         }
         $requestNs = !empty($api) ? config('karl.laracrud.request.apiNamespace') : config('karl.laracrud.request.namespace');
         $requestFolder = !empty($this->table) ? ucfirst(Str::camel($this->table)) : $this->modelName;
-        $this->requestFolderNs = $this->getFullNS($requestNs) . '\\' . $requestFolder;
+
+        $moduleEnabled = config('karl.laracrud.modules.enabled') == true ?? false;
+        $modulePath = config('karl.laracrud.modules.rootPath').'\\'.config('karl.laracrud.modules.vendorPath');
+
+        $ns = !empty($api) ? config('karl.laracrud.request.apiNamespace') : config('karl.laracrud.request.namespace');
+
+        $rfns = $moduleEnabled
+                ? $modulePath . '\\' . $requestNs
+                : $this->getFullNS($requestNs);
+
+        $this->requestFolderNs = $rfns . '\\' . $requestFolder;
+        // dd($this->requestFolderNs);
     }
 
     /**
@@ -216,6 +234,19 @@ class Controller implements Crud
      */
     protected function globalVars()
     {
+        // $moduleEnabled = config('karl.laracrud.modules.enabled') == true ?? false;
+        // $modulePath = config('karl.laracrud.modules.rootPath').'\\'.config('karl.laracrud.modules.vendorPath');
+
+        // $viewPath = $moduleEnabled ? strtolower(config('karl.laracrud.modules.vendorPath')).'::':'';
+
+        // $ns = !empty($api) ? config('karl.laracrud.request.apiNamespace') : config('karl.laracrud.request.namespace');
+
+        // $rfns = $moduleEnabled
+        //         ? $modulePath . '\\' . $requestNs
+        //         : $this->getFullNS($requestNs);
+
+        // $this->requestFolderNs = $rfns . '\\' . $requestFolder;
+
         $rel = $this->makeRelation();
 
         return [
@@ -226,7 +257,7 @@ class Controller implements Crud
             'viewPath' => $this->viewPath,
             'requestClass' => $this->requestClass,
             'table' => $this->table,
-            'namespace' => trim($this->namespace, '/'),
+            'namespace' => trim($this->namespace, '/'), // XXX
             'belongsToRelation' => $rel['belongsToRelation'],
             'belongsToRelationVars' => $rel['belongsToRelationVars'],
             'belongsToManyRelationSync' => '',
@@ -252,6 +283,8 @@ class Controller implements Crud
         $this->checkPath('');
         $fileName = !empty($this->fileName) ? $this->getFileName($this->fileName) . '.php' : $this->controllerName . 'Controller' . '.php';
         $filePath = base_path($this->toPath($this->namespace)) . '/' . $fileName;
+        // dd($filePath);
+
         if (file_exists($filePath)) {
             throw new \Exception($filePath . ' already exists');
         }

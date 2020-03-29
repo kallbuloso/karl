@@ -17,6 +17,7 @@ use kallbuloso\Karl\Builder\LaraCrud\Helpers\TemplateManager;
 class RouteCrud implements Crud
 {
     use Helper;
+
     /**
      * Save all register routes name. To avoid name conficts for new routes.
      *
@@ -78,6 +79,8 @@ class RouteCrud implements Crud
 
     public function __construct($controller = '', $api = false)
     {
+        // $this->files = $files;
+
         if (!is_array($controller)) {
             $this->controllers[] = $controller;
         } else {
@@ -90,7 +93,14 @@ class RouteCrud implements Crud
 
         $this->template = !empty($api) ? 'api' : 'web';
         $this->namespace = true == $api ? config('karl.laracrud.controller.apiNamespace') : config('karl.laracrud.controller.namespace');
-        $this->namespace = rtrim($this->getFullNS($this->namespace), '\\') . '\\';
+
+        if (config('karl.laracrud.modules.enabled') == true) {
+            $this->namespace = config('karl.laracrud.modules.rootPath').'\\'.config('karl.laracrud.modules.vendorPath').'\\'.$this->namespace . '\\';
+        } else {
+            $this->namespace = rtrim($this->getFullNS($this->namespace), '\\') . '\\';
+        }
+        // $this->namespace = rtrim($this->getFullNS($this->namespace), '\\') . '\\';
+        // dd($this->namespace);
     }
 
     /**
@@ -178,11 +188,26 @@ class RouteCrud implements Crud
      */
     public function appendRoutes($routesCode)
     {
-        $file = $this->getRouteFileName();
+        $moduleEnabled = config('karl.laracrud.modules.enabled') == true ?? false;
+        $modulePath = config('karl.laracrud.modules.rootPath').'\\'.config('karl.laracrud.modules.vendorPath');
+        $moduleReplace = "});\n";
+
+        $file = $moduleEnabled ? $modulePath.'\\'. $this->getRouteFileName() : $this->getRouteFileName();
+
         $routePath = file_exists($file) ? $file : base_path($file);
-        if (file_exists($routePath)) {
-            $splFile = new \SplFileObject($routePath, 'a');
-            $splFile->fwrite($routesCode);
+
+        if ($moduleEnabled) {
+            $contentRoute = file_get_contents($file);
+            if (file_exists($routePath)) {
+                file_put_contents(
+                    base_path($routePath),
+                    str_replace($moduleReplace, $routesCode.$moduleReplace, $contentRoute));
+            }
+        } else {
+            if (file_exists($routePath)) {
+                $splFile = new \SplFileObject($routePath, 'a');
+                $splFile->fwrite($routesCode);
+            }
         }
     }
 

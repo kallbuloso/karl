@@ -3,17 +3,20 @@
 namespace kallbuloso\Karl\Commands\LaraCrud;
 
 use Illuminate\Console\Command;
-use kallbuloso\Karl\Builder\LaraCrud\Crud\Controller;
-use kallbuloso\Karl\Builder\LaraCrud\Crud\Model;
-use kallbuloso\Karl\Builder\LaraCrud\Crud\Request;
-use kallbuloso\Karl\Builder\LaraCrud\Crud\RequestResource;
-use kallbuloso\Karl\Builder\LaraCrud\View\Create;
 use kallbuloso\Karl\Builder\LaraCrud\View\Edit;
-use kallbuloso\Karl\Builder\LaraCrud\View\Index;
 use kallbuloso\Karl\Builder\LaraCrud\View\Show;
+use kallbuloso\Karl\Builder\LaraCrud\Crud\Model;
+use kallbuloso\Karl\Builder\LaraCrud\View\Index;
+use kallbuloso\Karl\Builder\LaraCrud\View\Create;
+use kallbuloso\Karl\Builder\LaraCrud\Crud\Request;
+use kallbuloso\Karl\Builder\LaraCrud\Crud\RouteCrud;
+use kallbuloso\Karl\Builder\LaraCrud\Crud\Controller;
+use kallbuloso\Karl\Builder\LaraCrud\Crud\RequestResource;
+use kallbuloso\Karl\Builder\LaraCrud\Helpers\Helper;
 
 class Mvc extends Command
 {
+    use Helper;
     /**
      * The name and signature of the console command.
      *
@@ -49,6 +52,7 @@ class Mvc extends Command
             $table = $this->argument('table');
             $api = $this->option('api');
             Request::checkMissingTable($table);
+
             try {
                 $modelCrud = new Model($table);
                 $modelCrud->save();
@@ -72,6 +76,43 @@ class Mvc extends Command
                 $controllerCrud = new Controller($modelNs, false, false, $api);
                 $controllerCrud->save();
                 $this->info('Controller class created successfully');
+            } catch (\Exception $e) {
+                $this->error($e->getMessage());
+            }
+
+            try {
+                $controllers = [];
+                $controller = $modelCrud->modelName().'Controller';
+
+                $namespace = $api == true ? config('karl.laracrud.controller.apiNamespace') : config('karl.laracrud.controller.namespace');
+
+                if (config('karl.laracrud.modules.enabled') == true) {
+                    $namespace = config('karl.laracrud.modules.rootPath').'\\'.config('karl.laracrud.modules.vendorPath').'\\'.$namespace;
+                } else {
+                    $namespace = $this->getFullNS($namespace);
+                }
+
+                if ($controller == 'all') {
+                    $path = $this->toPath($namespace);
+                    $dirIt = new \RecursiveDirectoryIterator(base_path($path));
+                    $rit = new \RecursiveIteratorIterator($dirIt);
+                    while ($rit->valid()) {
+                        if (!$rit->isDot()) {
+                            $controllers[] = rtrim($namespace, '\\') . '\\' . str_replace('', str_replace('/', '\\', $rit->getSubPathName()));
+                        }
+                        $rit->next();
+                    }
+                    $routeCrud = new RouteCrud($controllers, $api);
+                } else {
+                    $controller = str_replace('/', '\\', $controller);
+                    if (!stripos(rtrim($namespace, '\\') . '\\', $controller)) {
+                        $controller = rtrim($namespace, '\\') . '\\' . $controller;
+                    }
+
+                    $routeCrud = new RouteCrud($controller, $api);
+                }
+                $routeCrud->save();
+                $this->info('Routes created successfully');
             } catch (\Exception $e) {
                 $this->error($e->getMessage());
             }

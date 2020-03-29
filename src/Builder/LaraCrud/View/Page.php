@@ -88,8 +88,12 @@ abstract class Page implements Crud
      */
     public function __construct()
     {
+        $moduleEnabled = config('karl.laracrud.modules.enabled') == true ?? false;
+        $modulePath = config('karl.laracrud.modules.rootPath').'\\'.config('karl.laracrud.modules.vendorPath');
+
+        $this->resource_path = base_path($moduleEnabled ? $modulePath : "").'/'. config('karl.laracrud.view.path');
+
         $this->version = config('karl.laracrud.view.bootstrap');
-        $this->resource_path = config('karl.laracrud.view.path');
 
         $this->filePath = rtrim($this->resource_path, '/') . '/' . $this->folder . '/' . $this->name . '.blade.php';
     }
@@ -103,8 +107,9 @@ abstract class Page implements Crud
             throw  new \Exception($this->name . ' already exists');
         }
         $folder = rtrim($this->resource_path, '/') . '/' . $this->folder;
-        if (!file_exists($folder)) {
-            mkdir($folder);
+
+        if (! is_dir($directory = $folder)) {
+            mkdir($directory, 0755, true);
         }
         $table = new \SplFileObject($this->filePath, 'w+');
         $table->fwrite($this->template());
@@ -117,9 +122,9 @@ abstract class Page implements Crud
     {
         $pagePath = config('karl.laracrud.view.page.path');
         if (!empty($pagePath)) {
-            $folder = rtrim(config('karl.laracrud.view.path'), '/') . '/' . $pagePath;
-            if (!file_exists($folder)) {
-                mkdir($folder);
+            $folder = rtrim($this->resource_path, '/') . '/' . $pagePath;
+            if (! is_dir($directory = $folder)) {
+                mkdir($directory, 0755, true);
             }
             $this->folder = trim($pagePath, '/') . '/' . $this->table->name();
         } else {
@@ -185,8 +190,7 @@ abstract class Page implements Crud
         if (isset(static::$routeMap[$action])) {
             return static::$routeMap[$action];
         }
-
-        return $table . '.' . $method;
+        return str_replace("_",'',$table) . '.' . $method;
     }
 
     /**

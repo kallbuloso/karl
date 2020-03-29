@@ -3,10 +3,13 @@
 namespace kallbuloso\Karl\Builder\LaraCrud\Helpers;
 
 use Illuminate\Support\Str;
+use kallbuloso\Karl\Helpers\Helpers;
+use Illuminate\Filesystem\Filesystem;
 use kallbuloso\Karl\Builder\LaraCrud\DbReader\Database;
 
 trait Helper
 {
+    use Helpers;
 
     /**
      * Import Namespace for Usages

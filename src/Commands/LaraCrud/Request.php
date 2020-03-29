@@ -67,7 +67,12 @@ class Request extends Command
 
     private function modelFullName($model)
     {
-        $modelNamespace = $this->getFullNS(config('karl.laracrud.model.namespace', 'App'));
+        if (config('karl.laracrud.modules.enabled') == true) {
+            $modelNamespace = config('karl.laracrud.modules.rootPath').'\\'.config('karl.laracrud.modules.vendorPath').'\\'.config('karl.laracrud.model.namespace');
+        } else {
+            $modelNamespace = $this->getFullNS(config('karl.laracrud.model.namespace', 'App'));
+        }
+        // $modelNamespace = $this->getFullNS(config('karl.laracrud.model.namespace', 'App'));
         if (!class_exists($model)) {
             return $modelNamespace . '\\' . $model;
         }

@@ -77,12 +77,20 @@ class RequestController implements Crud
      */
     public function __construct(\Illuminate\Database\Eloquent\Model $model, $controller = '', $api = false, $name = '')
     {
+        $moduleEnabled = config('karl.laracrud.modules.enabled') == true ?? false;
+        $modulePath = config('karl.laracrud.modules.rootPath').'\\'.config('karl.laracrud.modules.vendorPath');
+
         $this->model = $model;
         $policies = Gate::policies();
         $this->policy = $policies[get_class($this->model)] ?? false;
 
         $controllerNs = !empty($api) ? config('karl.laracrud.controller.apiNamespace', 'App\Http\Controllers\Api') : config('karl.laracrud.controller.namespace', 'App\Http\Controllers');
-        $this->controllerNs = $this->getFullNS($controllerNs);
+
+        $this->controllerNs = $moduleEnabled
+                ? $modulePath . '\\' . $controllerNs
+                : $this->getFullNS($controllerNs);
+
+        // $this->controllerNs = $cNs;
         $this->table = $model->getTable();
         $this->folderName = !empty($name) ? $name : $this->table;
         $this->template = !empty($api) ? 'api' : 'web';
@@ -98,7 +106,12 @@ class RequestController implements Crud
 
             $this->classInspector = new ClassInspector($this->controllerName);
             $requestNs = !empty($api) ? config('karl.laracrud.request.apiNamespace') : config('karl.laracrud.request.namespace');
-            $this->namespace = $this->getFullNS(trim($requestNs, '/')) . '\\' . ucfirst(Str::camel($this->folderName));
+
+            $nSc = $moduleEnabled
+                    ? $modulePath . '\\' . $requestNs
+                    : $this->getFullNS(trim($requestNs, '/'));
+
+            $this->namespace = $nSc . '\\' . ucfirst(Str::camel($this->folderName));
             $this->modelName = $this->getModelName($this->table);
         }
     }

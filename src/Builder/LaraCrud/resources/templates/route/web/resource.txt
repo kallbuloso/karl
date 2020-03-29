@@ -1,2 +1,2 @@
 
-Route::resource('@@table@@','@@controller@@');
+    Route::resource('@@table@@','@@controller@@');

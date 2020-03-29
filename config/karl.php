@@ -55,6 +55,20 @@ return [
     'laracrud' => [
 
         /*
+         * Root Namespace of Modules. For example if root namespace is App then controller nas Http|Controllers
+         * will be App\Http\Controllers
+         */
+        'modules' => [
+            /**
+             * If enabled of use Module
+             * Default = false
+             */
+            'enabled' => false,
+            'rootPath' => 'Modules',
+            'vendorPath' => 'Blog',
+        ],
+
+        /*
          * Root Namespace of all the Classes. For example if root namespace is App then controller nas Http|Controllers
          * will be App\Http\Controllers
          */
@@ -125,9 +139,9 @@ return [
              */
             'getDateFormat' => [
                 'time' => 'h:i A',
-                'date' => 'm/d/Y',
-                'datetime' => 'm/d/Y h:i A',
-                'timestamp' => 'm/d/Y h:i A',
+                'date' => 'd/m/Y',
+                'datetime' => 'd/m/Y h:i A',
+                'timestamp' => 'd/m/Y h:i A',
             ],
 
             /*
@@ -149,10 +163,10 @@ return [
             ],
         ],
         'factory' => [
-            'path' => base_path('database/factories'),
+            'path' => 'database/factories',
             'suffix' => 'Factory',
         ],
-        'view' => [
+        'view' => [ // XXX Agrupar o views no path correspondete a Table
             /*
              * There are one column that used as title for that table. For example title column in posts table. name column in categories table etc
              */
@@ -162,12 +176,12 @@ return [
             /*
              * Path to the main folder. Folder path are relative to base_path
              */
-            'path' => resource_path('views'),
+            'path' => 'resources/views',
 
             /*
-             * Default Layout
+             * Default layout.app
              */
-            'layout' => 'layouts.app',
+            'layout' => 'template::app',
 
             /*
              * Which bootstrap/theme  you like to use in your view code. Available version are 4 and bulma
@@ -208,7 +222,7 @@ return [
                     /*
                      * Style of the page. available options are table, panel
                      */
-                    'type' => 'table',
+                    'type' => 'panel',
                 ],
                 'create' => [
                     'name' => 'create',
@@ -258,7 +272,7 @@ return [
              */
             'classSuffix' => 'Request',
         ],
-        'policy' => [
+        'policy' => [ // XXX Adicionar Policies no Módulos
             /*
              * Root namespace
              */
@@ -268,6 +282,12 @@ return [
              * After every policy class name this world will be added. For example, User will be UserPolicy
              */
             'classSuffix' => 'Policy',
+        ],
+        'menu' => [ // XXX usar factory como exemplo
+            'add' => true, // true or false
+            'prefix' => true,
+            'additionalPrefix' => 'admin',
+            'path' => resource_path('views/layouts/partials/admin/_menu.blade.php'),
         ],
         'route' => [
             /*
@@ -295,7 +315,7 @@ return [
              */
             'prefix' => false,
         ],
-        'transformer' => [
+        'transformer' => [ // XXX trabalhar o trasnformer para os Modules
             /*
              * Root namespace
              */
@@ -310,7 +330,7 @@ return [
         /*
          * PHPUnit test. Which shifts with laravel by default
          */
-        'test' => [
+        'test' => [ // XXX trabalhar os tests para os Modules
             /*
              * Feature tests may test a larger portion of your code, including how several objects interact
              * with each other or even a full HTTP request to a JSON endpoint

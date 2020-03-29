@@ -39,7 +39,14 @@ class ModelFactory implements Crud
     public function __construct($model, $name = '')
     {
         $this->name = $name;
-        $modelNamespace = $this->getFullNS(config('karl.laracrud.model.namespace', 'App'));
+        if (config('karl.laracrud.modules.enabled') == true) {
+            $modelNamespace = config('karl.laracrud.modules.rootPath').'\\'.config('karl.laracrud.modules.vendorPath').'\\'.config('karl.laracrud.model.namespace');
+        } else {
+            $modelNamespace = $this->getFullNS(config('karl.laracrud.model.namespace'));
+        }
+        // $modelNamespace = $this->getFullNS(config('karl.laracrud.model.namespace', 'App'));
+        // dd($modelNamespace);
+
         if (!class_exists($model)) {
             $model = $modelNamespace . '\\' . $model;
         }
@@ -52,7 +59,9 @@ class ModelFactory implements Crud
 
     public function save()
     {
-        $path = config('karl.laracrud.factory.path');
+        $path = config('karl.laracrud.modules.enabled') == true
+                ? base_path(config('karl.laracrud.modules.rootPath').'\\'.config('karl.laracrud.modules.vendorPath').'\\database\\factories')
+                : base_path(config('karl.laracrud.factory.path'));
         $name = $this->getName();
         if (file_exists($path . '/' . $name)) {
             throw new \Exception($name . ' already exists');

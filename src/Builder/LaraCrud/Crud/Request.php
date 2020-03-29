@@ -56,7 +56,14 @@ class Request implements Crud
         $this->model = $model;
         $this->table = new Table($model->getTable());
         $this->namespace = !empty($api) ? config('karl.laracrud.request.apiNamespace') : config('karl.laracrud.request.namespace');
-        $this->namespace = $this->getFullNS($this->namespace);
+
+        if (config('karl.laracrud.modules.enabled') == true) {
+            $this->namespace = config('karl.laracrud.modules.rootPath').'\\'.config('karl.laracrud.modules.vendorPath').'\\'.$this->namespace;
+        } else {
+            $this->namespace = $this->getFullNS($this->namespace);
+        }
+        // $this->namespace = $this->getFullNS($this->namespace);
+        // dd($this->namespace);
         $this->modelName = $this->getModelName($model->getTable());
         if (!empty($name)) {
             $this->parseName($name);
