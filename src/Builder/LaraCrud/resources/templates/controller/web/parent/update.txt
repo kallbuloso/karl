@@ -12,10 +12,12 @@
 
         if ($@@modelNameParam@@->save()) {
             @@belongsToManyRelationSync@@
-            session()->flash('app_message', '@@modelName@@ successfully updated');
+            notify()->success(Lang::getFromJson('@@modelName@@ successfully updated!'),
+                              Lang::getFromJson('@@modelName@@'), ['timeOut' => 5000]);
             return redirect()->route('@@table@@.index');
-            } else {
-                session()->flash('app_error', 'Something is wrong while updating @@modelName@@');
-            }
+        } else {
+            notify()->error(Lang::getFromJson('Something is wrong while updating @@modelName@@'),
+                            Lang::getFromJson('@@modelName@@'), ['timeOut' => 5000]);
+        }
         return redirect()->back();
     }

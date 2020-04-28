@@ -63,9 +63,9 @@ return [
              * If enabled of use Module
              * Default = false
              */
-            'enabled' => false,
+            'enabled' => true,
             'rootPath' => 'Modules',
-            'vendorPath' => 'Blog',
+            'vendorPath' => 'Article',
         ],
 
         /*
@@ -197,7 +197,7 @@ return [
              * For above example, all of the view of this package will be start blog::
              * So Laravel will find that view to package view folder instead of default view folder.
              */
-            'namespace' => false,
+            'namespace' => 'article',
 
             /*
              * Protected Columns. There are some column that are internal use only.
@@ -222,7 +222,7 @@ return [
                     /*
                      * Style of the page. available options are table, panel
                      */
-                    'type' => 'panel',
+                    'type' => 'table',
                 ],
                 'create' => [
                     'name' => 'create',
