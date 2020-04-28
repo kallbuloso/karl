@@ -49,6 +49,7 @@ Opcionalmente, você pode publicar a configuração para fornecer um `stub` de p
 Aqui estão as informações de uso dos comandos;
 
 - [karl:make-auth](/readme/auth.md)
+- [karl:laracrud](/readme/laracrud.md)
 - [karl:make-multi-auth](/readme/multiauth.md)
 - [karl:make-model-replace](/readme/models.md)
 - [karl:make-schema](/readme/schema.md)
@@ -76,6 +77,7 @@ Se você descobrir algum problema relacionado à segurança, envie um e-mail par
 
 - [Amaral karl][link-author]
 - [kallbuloso][link-kallbuloso]
+- [digitaldreams][link-digitaldreams]
 - [All Contributors][link-contributors]
 
 ## License
@@ -90,5 +92,6 @@ O kallbuloso/laravel-tools é liberado sob a licença MIT. Consulte o [arquivo d
 [link-downloads]: https://packagist.org/packages/kallbuloso/laravel-karl
 [link-travis]: https://travis-ci.org/kallbuloso/laravel-karl
 [link-author]: https://github.com/kallbuloso
-[link-kallbuloso]: http://kallbuloso.com.br
+[link-kallbuloso]: https://kallbuloso.com.br
+[link-digitaldreams]: https://github.com/digitaldreams/laracrud
 [link-contributors]: /contributing.md
